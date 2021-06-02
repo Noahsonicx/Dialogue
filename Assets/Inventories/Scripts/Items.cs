@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory
+namespace Inventorye
 {
 
     [System.Serializable]
@@ -108,7 +108,7 @@ namespace Inventory
             Heal = copyItem.Heal;
         }
 
-
+        public virtual void OnClicked() => Debug.Log($"Item pressed was: {name}!");
 
     }
 }
