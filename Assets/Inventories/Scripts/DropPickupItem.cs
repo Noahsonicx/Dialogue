@@ -9,14 +9,14 @@ namespace Inventorye
     {
         [SerializeField] private Inventory inventory;
         [SerializeField] private Transform dropPoint;
-        [SerializeField] private Camera camera;
+        [SerializeField] private Camera cam;
     
 
         public void Update()
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
-                Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                 RaycastHit hitInfo;
                 if(Physics.Raycast(ray, out hitInfo, 50f))
                 {
