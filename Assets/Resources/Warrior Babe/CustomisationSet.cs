@@ -11,6 +11,15 @@ public class CustomisationSet : MonoBehaviour
     public CharacterClass characterClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
     public int selectedClassIndex = 8;
+    [System.Serializable]
+    public struct Stats
+    {
+        public string baseStatsName;
+        public int baseStats;
+        public int tempStats;
+
+    };
+    public Stats[] characterStats;
     [Header("DropDown Menu")]
     public bool showDropdown;
     public Vector2 scrollPos;
@@ -31,9 +40,13 @@ public class CustomisationSet : MonoBehaviour
     [Header("Max amount of textures per type")]
     public int skinMax;
     public int eyesMax, mouthMax, hairMax, armourMax, clothesMax;
+    [Header("Mat Name")]
+    public string[] matName = new string[6];
 
     private void Start()
     {
+        matName = new string[] { "Skin", "Eyes", "Mouth", "Hair", "Armour", "Clothes" };
+
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
         
         for (int i = 0; i < skinMax; i++)
@@ -147,12 +160,72 @@ public class CustomisationSet : MonoBehaviour
                 break;
         }    
     }
+    void ChooseClass(int classIndex)
+    {
+        switch(classIndex)
+        {
+            case 0:
+                characterClass = CharacterClass.Barbarian;
+                break;
+            case 1:
+                characterClass = CharacterClass.Bard;
+                break;
+            case 2:
+                characterClass = CharacterClass.Druid;
+                break;
+            case 3:
+                characterClass = CharacterClass.Monk;
+                break;
+            case 4:
+                characterClass = CharacterClass.Paladin;
+                break;
+            case 5:
+                characterClass = CharacterClass.Ranger;
+                break;
+            case 6:
+                characterClass = CharacterClass.Sorcerer;
+                break;
+            case 7:
+                characterClass = CharacterClass.Warlock;
+                break;
+        }
+        
+    }
+    private void OnGUI()
+    {
+        #region Gui Value
+        Vector2 scr = new Vector2(Screen.width / 16, Screen.height / 9);
+        //int i = 0;
+        // Starting positions
+        float left = 0.25f * scr.x;
+        float mid = 0.75f * scr.x;
+        float right = 2.25f * scr.x;
+        //sizes
+        float x = 0.5f * scr.x;
+        float y = 0.5f * scr.y;
+        float lable = 1.5f * scr.x;
+        #endregion
+        for (int i = 0; i < matName.Length; i++)
+        {
+            if (GUI.Button(new Rect(left, y + i * y, x, y), "<"))
+            {
+                SetTexture(matName[i], -1);
+            }
+            GUI.Box(new Rect(mid, y + i * y, lable, y), matName[i]);
+            if (GUI.Button(new Rect(right, y + i * y, x, y), ">"))
+            {
+                SetTexture(matName[i], 1);
+            }
+        }
+
+    }
 }
 public enum CharacterClass
 {
     Barbarian,
     Bard,
     Druid,
+    Monk,
     Paladin,
     Ranger,
     Sorcerer,
