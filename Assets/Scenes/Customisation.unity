@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e512f08bb59fff49abb5b8c6892c10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Sonic
   characterClass: 0
   selectedClass:
   - 
@@ -340,9 +340,28 @@ MonoBehaviour:
   - 
   - 
   selectedClassIndex: 8
+  characterStats:
+  - baseStatsName: Strength
+    baseStats: 0
+    tempStats: 0
+  - baseStatsName: Dexterity
+    baseStats: 0
+    tempStats: 0
+  - baseStatsName: Constitution
+    baseStats: 0
+    tempStats: 0
+  - baseStatsName: Wisdom
+    baseStats: 0
+    tempStats: 0
+  - baseStatsName: Intelligence
+    baseStats: 0
+    tempStats: 0
+  - baseStatsName: Charisma
+    baseStats: 0
+    tempStats: 0
   showDropdown: 0
   scrollPos: {x: 0, y: 0}
-  classButton: 
+  classButton: Choose your class
   statPoints: 10
   skin: []
   eyes: []
@@ -363,6 +382,13 @@ MonoBehaviour:
   hairMax: 5
   armourMax: 11
   clothesMax: 11
+  matName:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!4 &1447755465
 Transform:
   m_ObjectHideFlags: 0
@@ -377,6 +403,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1722355948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1722355949}
+  - component: {fileID: 1722355950}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1722355949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722355948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.033818454, y: 0.36122036, z: -0.18904823}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722355950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722355948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badfb2bce4f9fc14789ce6767ecf9c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 0}
+  player: {fileID: 0}
 --- !u!23 &128138792772544835
 MeshRenderer:
   m_ObjectHideFlags: 0

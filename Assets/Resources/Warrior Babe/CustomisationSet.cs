@@ -165,31 +165,105 @@ public class CustomisationSet : MonoBehaviour
         switch(classIndex)
         {
             case 0:
+                characterStats[0].baseStats = 18;
+                characterStats[1].baseStats = 10;
+                characterStats[2].baseStats = 15;
+                characterStats[3].baseStats = 6;
+                characterStats[4].baseStats = 6;
+                characterStats[5].baseStats = 5;
+
                 characterClass = CharacterClass.Barbarian;
                 break;
             case 1:
+                characterStats[0].baseStats = 6;
+                characterStats[1].baseStats = 13;
+                characterStats[2].baseStats = 7;
+                characterStats[3].baseStats = 10;
+                characterStats[4].baseStats = 6;
+                characterStats[5].baseStats = 18;
+
                 characterClass = CharacterClass.Bard;
                 break;
             case 2:
+                characterStats[0].baseStats = 5;
+                characterStats[1].baseStats = 8;
+                characterStats[2].baseStats = 8;
+                characterStats[3].baseStats = 9;
+                characterStats[4].baseStats = 15;
+                characterStats[5].baseStats = 15;
+
                 characterClass = CharacterClass.Druid;
                 break;
             case 3:
+                characterStats[0].baseStats = 8;
+                characterStats[1].baseStats = 15;
+                characterStats[2].baseStats = 10;
+                characterStats[3].baseStats = 15;
+                characterStats[4].baseStats = 8;
+                characterStats[5].baseStats = 4;
+
                 characterClass = CharacterClass.Monk;
                 break;
             case 4:
+                characterStats[0].baseStats = 15;
+                characterStats[1].baseStats = 6;
+                characterStats[2].baseStats = 10;
+                characterStats[3].baseStats = 8;
+                characterStats[4].baseStats = 5;
+                characterStats[5].baseStats = 18;
+
                 characterClass = CharacterClass.Paladin;
                 break;
             case 5:
+                characterStats[0].baseStats = 8;
+                characterStats[1].baseStats = 16;
+                characterStats[2].baseStats = 8;
+                characterStats[3].baseStats = 12;
+                characterStats[4].baseStats = 8;
+                characterStats[5].baseStats = 8;
+
                 characterClass = CharacterClass.Ranger;
                 break;
             case 6:
+                characterStats[0].baseStats = 6;
+                characterStats[1].baseStats = 8;
+                characterStats[2].baseStats = 16;
+                characterStats[3].baseStats = 8;
+                characterStats[4].baseStats = 8;
+                characterStats[5].baseStats = 14;
+
                 characterClass = CharacterClass.Sorcerer;
                 break;
             case 7:
+                characterStats[0].baseStats = 6;
+                characterStats[1].baseStats = 6;
+                characterStats[2].baseStats = 6;
+                characterStats[3].baseStats = 10;
+                characterStats[4].baseStats = 14;
+                characterStats[5].baseStats = 18;
+
                 characterClass = CharacterClass.Warlock;
                 break;
         }
         
+    }
+    void SaveCharacter()
+    {
+        PlayerPrefs.SetInt("SkinIndex", skinIndex);
+        PlayerPrefs.SetInt("HairIndex", hairIndex);
+        PlayerPrefs.SetInt("EyesIndex", eyesIndex);
+        PlayerPrefs.SetInt("MouthIndex", mouthIndex);
+        PlayerPrefs.SetInt("ArmourIndex", armourIndex);
+        PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
+
+        PlayerPrefs.SetString("CharacterName", characterName);
+
+        for (int i = 0; i < characterStats.Length; i++)
+        {
+            PlayerPrefs.SetInt(characterStats[i].baseStatsName, characterStats[i].baseStats + characterStats
+                [i].tempStats);
+        }
+        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedClassIndex]);
     }
     private void OnGUI()
     {
@@ -205,6 +279,7 @@ public class CustomisationSet : MonoBehaviour
         float y = 0.5f * scr.y;
         float lable = 1.5f * scr.x;
         #endregion
+        #region Customisation Textures
         for (int i = 0; i < matName.Length; i++)
         {
             if (GUI.Button(new Rect(left, y + i * y, x, y), "<"))
@@ -217,7 +292,71 @@ public class CustomisationSet : MonoBehaviour
                 SetTexture(matName[i], 1);
             }
         }
+        #endregion
+        #region Choose Class
+        float classX = 12.75f * scr.x;
+        float h = 0;
+        if(GUI.Button(new Rect(classX, y+h*y,4*x,y), classButton))
+        {
+            showDropdown = !showDropdown;
+        }
+        h++;
+        if(showDropdown)
+        {
+            scrollPos = GUI.BeginScrollView(
+                new Rect(classX, y+h*y,4*x,4*y), scrollPos,
+                new Rect(0,0,0,selectedClass.Length * y),
+                false,true);
 
+            for (int i = 0; i < selectedClass.Length; i++)
+            {
+                if(GUI.Button(new Rect(0, y+i*y, 3*x, y),selectedClass[i]))
+                {
+                    classButton = selectedClass[i];
+                    showDropdown = false;
+                }
+            }
+            GUI.EndScrollView();
+        }
+
+
+
+        #endregion
+        #region Set Stats
+        GUI.Box(new Rect(classX,6*y,4*x,y), "Points: " + statPoints);
+        for(int i = 0; i < characterStats.Length; i++)
+        {
+            if(statPoints > 0)
+            {
+                //+
+                if(GUI.Button(new Rect(classX-x, 7 * y + i * y, x,y),"+"))
+                {
+                    statPoints--;
+                    characterStats[i].tempStats++;
+                }
+            }
+            GUI.Box(new Rect(classX, 7*y+i*y,4*x,y), characterStats[i].baseStatsName + " : "
+                +(characterStats[i].baseStats+characterStats[i].tempStats));
+
+            if (statPoints < 10 && characterStats[i].tempStats > 0)
+            {
+                //-
+                if (GUI.Button(new Rect(classX + 4 * x, 7 * y + i * y, x, y), "-"))
+                {
+                    statPoints++;
+                    characterStats[i].tempStats--;
+                }
+            }
+        }
+        #endregion
+
+        characterName = GUI.TextField(new Rect(left, 7 * y, 5 * x, y), 
+            characterName, 32);
+        if(GUI.Button(new Rect(left, 8 * y, 5 * x, y), "Save and Play"))
+        {
+            SaveCharacter();
+            SceneManager.LoadScene(2);
+        }
     }
 }
 public enum CharacterClass
