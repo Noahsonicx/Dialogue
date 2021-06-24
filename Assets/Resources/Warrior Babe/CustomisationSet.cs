@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CustomisationSet : MonoBehaviour
 {
+    // Binary Player data, save all the public statements as how they were, the only exception any Vector3
+    // statement such as Position and rotation needs to be put as: "public float[] position", for example
     [Header("Character Name")]
     public string characterName;
     [Header("Character Class")]
@@ -355,7 +357,7 @@ public class CustomisationSet : MonoBehaviour
         if(GUI.Button(new Rect(left, 8 * y, 5 * x, y), "Save and Play"))
         {
             SaveCharacter();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(5);
         }
     }
 }

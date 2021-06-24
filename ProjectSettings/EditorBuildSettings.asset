@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/22 4 21.unity
     guid: 72859b5ed2ea97a499e02515a3048c5f
   - enabled: 1
+    path: Assets/Scenes/Customisation.unity
+    guid: cb4a8f9c039a8fe429b17c29a6eb0c07
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 1d368412b0e5b4b4680732f478ffe181
   - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: 57b02853ad7b50a4290ae9f0ffd1df2e
+  - enabled: 1
+    path: Assets/Scenes/CustomisationScene.unity
+    guid: 2b0c3c201293f9b44a6cad79dda9abee
   m_configObjects: {}
