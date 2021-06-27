@@ -6,14 +6,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class PlayerBinary
 {
-    public static void SavePlayerData(/*"Enter Something Here"*/)
+    public static void SavePlayerData(Transform playerTransform, PlayerStats playerStats)
     {
-        PlayerData data = new PlayerData(/*"Enter Something Here"*/);
-
+        PlayerData data = new PlayerData(playerTransform, playerStats);
+        // new binary formatter creation
         BinaryFormatter formatter = new BinaryFormatter();
-
-        string path = Application.dataPath; //+ //For example "/BloodySave/.this"
-
+        //location where the file will be saved
+        string path = Application.dataPath + "/Binary"; //+ //For example "/BloodySave/.this"
+        // Creating a file at file path
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, data);
@@ -21,18 +21,20 @@ public static class PlayerBinary
         stream.Close();
     }
 
-    public static PlayerData LoadPlayerData(/*Enter Something here*/)
+    public static PlayerData LoadPlayerData(Transform playerTransform, PlayerStats playerStats)
     {
-        string path = Application.dataPath; //+ //For example "/BloodySave/.this" 
+        string path = Application.dataPath + "/Binary"; //+ //For example "/BloodySave/.this" 
 
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
+            // Deserializing data
             PlayerData data = (PlayerData)formatter.Deserialize(stream);
             stream.Close();
 
-            data.LoadPlayerData(/*Enter Something Here*/);
+            //loading the data back into unity
+            data.LoadPlayerData(playerTransform, playerStats);
             return data;
         }
         else
