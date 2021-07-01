@@ -19,8 +19,8 @@ public class CustomisationGet : MonoBehaviour
         SetTexture("Eyes", PlayerPrefs.GetInt("EyesIndex"));
         SetTexture("Mouth", PlayerPrefs.GetInt("MouthIndex"));
         SetTexture("Hair", PlayerPrefs.GetInt("HairIndex"));
-        SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"));
         SetTexture("Clothes", PlayerPrefs.GetInt("ClothesIndex"));
+        SetTexture("Armour", PlayerPrefs.GetInt("ArmourIndex"));
         player.name = PlayerPrefs.GetString("CharacterName");
     }
     void SetTexture(string type, int index)
@@ -45,12 +45,12 @@ public class CustomisationGet : MonoBehaviour
                 texture = Resources.Load("Character/Hair_" + index) as Texture2D;
                 matIndex = 4;
                 break;
-            case "Armour":
-                texture = Resources.Load("Character/Armour_" + index) as Texture2D;
-                matIndex = 5;
-                break;
             case "Clothes":
                 texture = Resources.Load("Character/Clothes_" + index) as Texture2D;
+                matIndex = 5;
+                break;
+            case "Armour":
+                texture = Resources.Load("Character/Armour_" + index) as Texture2D;
                 matIndex = 6;
                 break;
         }

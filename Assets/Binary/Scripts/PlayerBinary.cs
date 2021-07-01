@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,13 +6,14 @@ public static class PlayerBinary
 {
     public static void SavePlayerData(Transform playerTransform, PlayerStats playerStats)
     {
-        PlayerData data = new PlayerData(playerTransform, playerStats);
         // new binary formatter creation
         BinaryFormatter formatter = new BinaryFormatter();
         //location where the file will be saved
-        string path = Application.dataPath + "/Binary"; //+ //For example "/BloodySave/.this"
+        string path = Application.dataPath + "/BinaryData"; 
         // Creating a file at file path
         FileStream stream = new FileStream(path, FileMode.Create);
+
+        PlayerData data = new PlayerData(playerTransform, playerStats);
 
         formatter.Serialize(stream, data);
 
@@ -23,7 +22,7 @@ public static class PlayerBinary
 
     public static PlayerData LoadPlayerData(Transform playerTransform, PlayerStats playerStats)
     {
-        string path = Application.dataPath + "/Binary"; //+ //For example "/BloodySave/.this" 
+        string path = Application.dataPath + "/BinaryData"; 
 
         if(File.Exists(path))
         {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class CustomisationSet : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class CustomisationSet : MonoBehaviour
     [Header("Character Class")]
     public CharacterClass characterClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
-    public int selectedClassIndex = 8;
+    public int selectedIndex = 0;
     [System.Serializable]
     public struct Stats
     {
@@ -47,7 +47,7 @@ public class CustomisationSet : MonoBehaviour
 
     private void Start()
     {
-        matName = new string[] { "Skin", "Eyes", "Mouth", "Hair", "Armour", "Clothes" };
+        matName = new string[] { "Skin", "Eyes", "Mouth", "Hair", "Clothes", "Armour"};
 
         selectedClass = new string[] { "Barbarian", "Bard", "Druid", "Monk", "Paladin", "Ranger", "Sorcerer", "Warlock" };
         
@@ -71,18 +71,19 @@ public class CustomisationSet : MonoBehaviour
             Texture2D tempTexture = Resources.Load("Character/Hair_" + i) as Texture2D;
             hair.Add(tempTexture);
         }
-        for (int i = 0; i < armourMax; i++)
-        {
-            Texture2D tempTexture = Resources.Load("Character/Armour_" + i) as Texture2D;
-            armour.Add(tempTexture);
-
-        }            
         for (int i = 0; i < clothesMax; i++)
         {
             Texture2D tempTexture = Resources.Load("Character/Clothes_" + i) as Texture2D;
             clothes.Add(tempTexture);
+
+        }            
+        for (int i = 0; i < armourMax; i++)
+        {
+            Texture2D tempTexture = Resources.Load("Character/Armour_" + i) as Texture2D;
+            armour.Add(tempTexture);
         }
     }
+
     void SetTexture(string type, int dir)
     {
         int index = 0, max = 0, matIndex = 0;
@@ -114,16 +115,16 @@ public class CustomisationSet : MonoBehaviour
                 textures = hair.ToArray();
                 matIndex = 4;
                 break;
-            case "Armour":
-                index = armourIndex;
-                max = armourMax;
-                textures = armour.ToArray();
-                matIndex = 5;
-                break;
             case "Clothes":
                 index = clothesIndex;
                 max = clothesMax;
                 textures = clothes.ToArray();
+                matIndex = 5;
+                break;
+            case "Armour":
+                index = armourIndex;
+                max = armourMax;
+                textures = armour.ToArray();
                 matIndex = 6;
                 break;
         }
@@ -136,6 +137,7 @@ public class CustomisationSet : MonoBehaviour
         {
             index = 0;
         }
+
         Material[] mat = characterRenderer.materials;
         mat[matIndex].mainTexture = textures[index];
         characterRenderer.materials = mat;
@@ -154,11 +156,11 @@ public class CustomisationSet : MonoBehaviour
             case "Hair":
                 hairIndex = index;
                 break;
-            case "Armour":
-                armourIndex = index;
-                break;
             case "Clothes":
                 clothesIndex = index;
+                break;
+            case "Armour":
+                armourIndex = index;
                 break;
         }    
     }
@@ -255,24 +257,23 @@ public class CustomisationSet : MonoBehaviour
         PlayerPrefs.SetInt("HairIndex", hairIndex);
         PlayerPrefs.SetInt("EyesIndex", eyesIndex);
         PlayerPrefs.SetInt("MouthIndex", mouthIndex);
-        PlayerPrefs.SetInt("ArmourIndex", armourIndex);
         PlayerPrefs.SetInt("ClothesIndex", clothesIndex);
+        PlayerPrefs.SetInt("ArmourIndex", armourIndex);
 
         PlayerPrefs.SetString("CharacterName", characterName);
 
         for (int i = 0; i < characterStats.Length; i++)
         {
-            PlayerPrefs.SetInt(characterStats[i].baseStatsName, characterStats[i].baseStats + characterStats
-                [i].tempStats);
+            PlayerPrefs.SetInt(characterStats[i].baseStatsName, characterStats[i].baseStats + characterStats[i].tempStats);
         }
-        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedClassIndex]);
+        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
     }
     private void OnGUI()
     {
         #region Gui Value
+        //16:9
         Vector2 scr = new Vector2(Screen.width / 16, Screen.height / 9);
-        //int i = 0;
-        // Starting positions
+        // starting positions
         float left = 0.25f * scr.x;
         float mid = 0.75f * scr.x;
         float right = 2.25f * scr.x;
@@ -282,8 +283,8 @@ public class CustomisationSet : MonoBehaviour
         float lable = 1.5f * scr.x;
         #endregion
         #region Customisation Textures
-        for (int i = 0; i < matName.Length; i++)
-        {
+       for (int i = 0; i < matName.Length; i++)
+       {
             if (GUI.Button(new Rect(left, y + i * y, x, y), "<"))
             {
                 SetTexture(matName[i], -1);
@@ -293,12 +294,12 @@ public class CustomisationSet : MonoBehaviour
             {
                 SetTexture(matName[i], 1);
             }
-        }
+       }
         #endregion
         #region Choose Class
         float classX = 12.75f * scr.x;
         float h = 0;
-        if(GUI.Button(new Rect(classX, y+h*y,4*x,y), classButton))
+        if(GUI.Button(new Rect(classX,y+h*y,4*x,y), classButton))
         {
             showDropdown = !showDropdown;
         }
@@ -306,23 +307,20 @@ public class CustomisationSet : MonoBehaviour
         if(showDropdown)
         {
             scrollPos = GUI.BeginScrollView(
-                new Rect(classX, y+h*y,4*x,4*y), scrollPos,
-                new Rect(0,0,0,selectedClass.Length * y),
-                false,true);
+                new Rect(classX, y + h *y, 4 * x, 4 * y),scrollPos,
+                new Rect(0,0,0,selectedClass.Length * y), false,true);
 
             for (int i = 0; i < selectedClass.Length; i++)
             {
-                if(GUI.Button(new Rect(0, y+i*y, 3*x, y),selectedClass[i]))
+                if(GUI.Button(new Rect(0, i*y, 3*x, y),selectedClass[i]))
                 {
+                    ChooseClass(i);
                     classButton = selectedClass[i];
                     showDropdown = false;
                 }
             }
             GUI.EndScrollView();
         }
-
-
-
         #endregion
         #region Set Stats
         GUI.Box(new Rect(classX,6*y,4*x,y), "Points: " + statPoints);
@@ -337,8 +335,8 @@ public class CustomisationSet : MonoBehaviour
                     characterStats[i].tempStats++;
                 }
             }
-            GUI.Box(new Rect(classX, 7*y+i*y,4*x,y), characterStats[i].baseStatsName + " : "
-                +(characterStats[i].baseStats+characterStats[i].tempStats));
+            GUI.Box(new Rect(classX, 7*y+i*y,4*x,y), characterStats[i].baseStatsName 
+                +" : "+(characterStats[i].baseStats+characterStats[i].tempStats));
 
             if (statPoints < 10 && characterStats[i].tempStats > 0)
             {
@@ -351,13 +349,13 @@ public class CustomisationSet : MonoBehaviour
             }
         }
         #endregion
+        
+        characterName = GUI.TextField(new Rect(left, 7 * y, 5 * x, y), characterName, 32);
 
-        characterName = GUI.TextField(new Rect(left, 7 * y, 5 * x, y), 
-            characterName, 32);
         if(GUI.Button(new Rect(left, 8 * y, 5 * x, y), "Save and Play"))
         {
             SaveCharacter();
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(2);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    /*
     public string characterName;
     public CharacterClass characterClass = CharacterClass.Barbarian;
     public string[] selectedClass = new string[8];
@@ -33,14 +34,16 @@ public class PlayerData
     public int skinMax;
     public int eyesMax, mouthMax, hairMax, armourMax, clothesMax;
     public string[] matName = new string[6];
-
+    
+    */
     public PlayerData(Transform playerTransform, PlayerStats playerStats)
     {
-
+        //characterName = playerStats.name;
     }
 
     public void LoadPlayerData(Transform playerTransform, PlayerStats playerStats)
     {
 
     }
+    
 }
