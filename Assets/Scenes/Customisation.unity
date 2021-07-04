@@ -280,7 +280,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &606156484
 GameObject:
@@ -363,7 +363,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793693254
 GameObject:
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793693254}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e512f08bb59fff49abb5b8c6892c10b, type: 3}
   m_Name: 
@@ -441,7 +441,7 @@ MonoBehaviour:
   hairIndex: 0
   armourIndex: 0
   clothesIndex: 0
-  characterRenderer: {fileID: 7473174681259704783}
+  characterRenderer: {fileID: 0}
   skinMax: 3
   eyesMax: 3
   mouthMax: 2
@@ -530,8 +530,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
---- !u!137 &7473174681259704783 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3217528989343142732, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
-  m_PrefabInstance: {fileID: 5409097303400927875}
-  m_PrefabAsset: {fileID: 0}

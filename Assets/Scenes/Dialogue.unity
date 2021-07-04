@@ -2469,12 +2469,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-    name: 
-    description: 
+    name: Axe
+    description: Its an axe
     value: 0
     amount: 0
-    icon: {fileID: 0}
-    mesh: {fileID: 0}
+    icon: {fileID: 2800000, guid: 3d1019447be492b4fab1a404d2a7b314, type: 3}
+    mesh: {fileID: 7034580852059493169}
     type: 0
     damage: 0
     armour: 0
