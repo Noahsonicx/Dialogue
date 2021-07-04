@@ -357,35 +357,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139672133}
   m_CullTransparentMesh: 1
---- !u!1 &146641186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6966965738120082732, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
-  m_PrefabInstance: {fileID: 318077238}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &146641187 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7774465032221798294, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
-  m_PrefabInstance: {fileID: 318077238}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &146641188
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146641186}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c5ef050ff3c1fca42b30eb0d3fa643de, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &149074448
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,8 +615,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8371546569412943990, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
+--- !u!4 &318077239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8371546569412943990, guid: 42f2724c92bd8b3488ff4897d99e1adf, type: 3}
+  m_PrefabInstance: {fileID: 318077238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318605733
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +686,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1461297130}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &432672735
 Camera:
@@ -2049,8 +2029,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 11.260001, z: 6.7500005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 146641187}
   - {fileID: 432672733}
+  - {fileID: 318077239}
   - {fileID: 149074449}
   m_Father: {fileID: 0}
   m_RootOrder: 6
